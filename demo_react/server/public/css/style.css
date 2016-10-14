@@ -1,0 +1,10 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.task-form-wrapper {
+  max-width: 330px;
+}
+.btn-search {
+      margin-top: 17px;
+}

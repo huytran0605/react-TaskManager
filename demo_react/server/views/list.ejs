@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../views/partials/header %>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>
+            <%- title %>
+        </h1>
+        <div class="search">
+            <form method="post" action="/api/find" class="form-inline">
+                <div class="form-group">
+                    <label for="startDate" class="cols-sm-2 control-label">Your Start date</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            <input type="text" name="startDate" value="" id="startDate" class=" datepicker form-control">
+                            <input type="hidden" id="startDateVal">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="endDate" class="cols-sm-2 control-label">Status</label>
+                    <div class="cols-sm-10">
+                        <select class="form-control" name="status" id="status">
+                            <% for(var i= 0; i<statusLists.length; i++) {%>
+                                <option value="<%= statusLists[i].key %>" <% if (statusLists[i].selected) { %> selected <%}%> ><%= statusLists[i].value %></option>
+                            <% }%>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default btn-search">Search</button>
+                </div>
+            </form>
+        </div>
+        <table class="table table-striped" id="task-table">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th colspan="2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i= 0; i<tasks.length; i++) {%>
+                    <tr>
+                        <td>
+                            <%= tasks[i].taskId %>
+                        </td>
+                        <td>
+                            <%= tasks[i].taskName %>
+                        </td>
+                        <td>
+                            <%=moment(tasks[i].startDate).format('MM/DD/YYYY');%>
+                        </td>
+                        <td>
+                            <%=moment(tasks[i].endDate).format('MM/DD/YYYY');%>
+                        </td>
+                        <td>
+                            <%= tasks[i].typeTask %>
+                        </td>
+                        <td>
+                            <%= tasks[i].status %>
+                        </td>
+                        <td class="actions">
+                            <a href='/api/task/<%= tasks[i]._id %>' class="edit-item btn btn-default" title="Edit">Edit</a>
+                        </td>
+                        <td class="actions">
+                            <form method="post" action="/api/<%=tasks[i].id%>?_method=DELETE" class="form-inline">
+                                <button type="submit" class="btn btn-default">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
+    <% include ../views/partials/footer %>
+</body>
+
+</html>

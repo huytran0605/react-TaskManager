@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<% include ../views/partials/header %>
+</head>
+
+<body>
+	<h1>Welcome
+		<%- title %>
+	</h1>
+	<div class="container task-form-wrapper">
+		<form action="/api/<%=task.id%>?_method=PUT" method="POST" class="form-horizontal">
+			<div class="form-group">
+				<label for="taskName" class="cols-sm-2 control-label">Your task name</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+						<input type="text" value="<% if (locals.task) { %> <%= task.taskName %> <% } %>" class="form-control" name="taskName" id="taskName"
+										placeholder="Enter your Name" />
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="startDate" class="cols-sm-2 control-label">Your Start date</label>
+				<div class="cols-sm-10">
+					<div class="input-group dateFormat">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input type="text" name="startDate" value="" id="startDate" class=" datepicker form-control">
+						<input type="hidden" class="dateVal" value="<% if (locals.task) { %><%=moment(task.startDate).format('MM/DD/YYYY');%><% } %>">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="endDate" class="cols-sm-2 control-label">Your End date</label>
+				<div class="cols-sm-10">
+					<div class="input-group dateFormat">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input type="text" name="endDate" value="" id="endDate" class="datepicker form-control">
+						<input type="hidden" class="dateVal" value="<% if (locals.task) { %><%=moment(task.endDate).format('MM/DD/YYYY');%><% } %>">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="typeTask" class="cols-sm-2 control-label">Type Task</label>
+				<div class="cols-sm-10">
+					<select class="form-control" name="typeTask" id="typeTask">
+						<% for(var i= 0; i<typeTaskLists.length; i++) {%>
+							<option value="<%= typeTaskLists[i].key %>" <% if (typeTaskLists[i].selected) { %> selected <%}%> ><%= typeTaskLists[i].value %></option>
+						<% }%>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="status" class="cols-sm-2 control-label">Status</label>
+				<div class="cols-sm-10">
+					<select class="form-control" name="status" id="status">
+						<% for(var i= 0; i<statusLists.length; i++) {%>
+							<option value="<%= statusLists[i].key %>" <% if (statusLists[i].selected) { %> selected <%}%> ><%= statusLists[i].value %></option>
+						<% }%>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group ">
+				<button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+			</div>
+		</form>
+	</div>
+	<% include ../views/partials/footer %>
+</body>
+
+</html>

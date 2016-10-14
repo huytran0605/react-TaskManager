@@ -1,0 +1,27 @@
+{
+  "name": "demo_task",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nf start -p 3000",
+    "dev": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "ejs": "^2.5.2",
+    "express": "~4.13.4",
+    "foreman": "^2.0.0",
+    "jade": "~1.11.0",
+    "method-override": "^2.3.6",
+    "moment": "^2.15.1",
+    "mongoose": "^4.6.2",
+    "mongoose-auto-increment": "^5.0.1",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
+  }
+}
